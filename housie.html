@@ -31,13 +31,9 @@
 				html_text+='</tr>'
 			}
 			$('.table tbody').append(html_text);
-			/*$('.table td').click(function(){
-				alert($(this).index());
-				alert($(this).parent().index());
-			})*/
-			//Housie Coding Starts from here
+			//Housie Coding Starts here
 			$('#generate_num').click(function(){
-				if(picked_numbers.count==99){
+				if(picked_numbers.length==99){
 					alert('Heay ! all numbers are picked. Game over');
 				}else{
 					var sel_num=randNumber();
@@ -45,19 +41,12 @@
 					var row=Math.floor((sel_num/10))
 					var col=(sel_num%10)-1
 					$('.table tr:eq('+row+')  td:eq('+col+')').addClass('sel-cell');
+					$('#picked_numbers').html(picked_numbers.join(','))
 				}
 			})
 		})
 		function randNumber(){
-			//var gen_number = Math.floor(Math.random()*(max-min+1)+min);
 			var gen_number = actual_numbers_set[(Math.random() * actual_numbers_set.length) | 0]
-			/*if($.inArray(gen_number,picked_numbers)!=-1){
-					randNumber();
-				} 
-			else{
-				picked_numbers.push(gen_number);
-				return gen_number;
-			}*/
 			picked_numbers.push(gen_number);
 			actual_numbers_set.splice(actual_numbers_set.indexOf(gen_number),1);
 			return gen_number;
@@ -77,7 +66,7 @@
 <div class="container">
 	<div class="jumbotron">
 	  <h1>Selected number is : <span id='selected_num'>0</span></h1>
-	  <p></p>
+	  <p>Numbers Order: <span id='picked_numbers'></span></p>
 	  <p><a class="btn btn-primary btn-lg" href="#" role="button" id="generate_num">Generate</a></p>
 	</div>
 	<div class="panel panel-primary">
